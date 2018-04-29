@@ -7,10 +7,13 @@ import java.rmi.server.UnicastRemoteObject;
  * ahpatil
  *
  */
+ // This is the dispatcher class
 public class MarketplaceDispatcher extends UnicastRemoteObject  {
-	String name;
-	Marketplace myMarketplace;
-	AbstractFactory view;
+	private String name;
+	private Marketplace myMarketplace;
+	private AbstractFactory view;
+	private Session session;
+	
 	public MarketplaceDispatcher(String name) throws RemoteException{
 		try{
 			this.name=name;
@@ -26,15 +29,29 @@ public class MarketplaceDispatcher extends UnicastRemoteObject  {
  		try{
 			UserPage myView = view.getCustomerview();
 			if(myMarketplace.AuthenticateAdmin(username,password).equals("admin")){
+				//Creating session for admin
+				session = myMarketplace.create("admin");
 				// Create a new instance of a AdminInvoker
 				Invoker invoker = new Invoker(view,"admin");
-				invoker.displayContent();
+				// gets choice for options
+				int choice = invoker.displayContent();
+				// Create a new instance of a ItemController
+				ItemController iController = new ItemController(name,session);
+				// Sends choice and invoker to perform action
+				iController.getChoice(choice,invoker);
 			}
 			else if(myMarketplace.AuthenticateCust(username,password).equals("customer")){
+				//Creating session for customer
+				session = myMarketplace.create("customer");
 				// Create a new instance of a CustomerInvoker
 				Invoker invoker = new Invoker(view,"customer");
-				invoker.displayContent();
-			}	
+				// gets choice for options
+				int choice = invoker.displayContent();
+				// Create a new instance of a ItemController
+				ItemController iController = new ItemController(name,session);
+				// Sends choice and invoker to perform action
+				iController.getChoice(choice,invoker);
+			}		
 			else{
 				myView.message("Incorrect username and password, Please try again");
 			}

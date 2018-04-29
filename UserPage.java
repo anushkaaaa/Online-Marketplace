@@ -7,7 +7,7 @@
 // Interface between Admin and Customer Pages
 public interface UserPage {
 	// To display the page details
-	void display();
+	int display();
 	// To display message
 	void message(String msg);
 }

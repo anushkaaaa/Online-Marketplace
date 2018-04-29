@@ -1,4 +1,3 @@
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 /**
@@ -7,10 +6,8 @@ import java.rmi.server.UnicastRemoteObject;
  * ahpatil
  *
  */
+// This is the model class for all the actions to perfomed by the marketplace
 public class MarketplaceModel extends UnicastRemoteObject implements Marketplace{
- 	/*It will authenticate the username and password
-	 * @return true on successful authentication else false 
-	 */
 	public String name="";
 	public MarketplaceModel(String name) throws RemoteException {
 		super(); 
@@ -30,4 +27,35 @@ public class MarketplaceModel extends UnicastRemoteObject implements Marketplace
 			return "customer";
 		return "";
  	}
- }
+	// To create session
+	@Override
+	public Session create(String role){
+		Session session = new Session(role);
+		return session;
+ 	}
+	//To browse the items
+	@Override
+	public String browse(Session session){
+		return "Welcome, you can now browse items!";
+	}
+	//To update the items
+	@Override
+	public String update(Session session){
+		return "Welcome, you can now update items!";
+	}
+	//To remove the items
+	@Override
+	public String remove(Session session){
+		return "Welcome, you can now remove items!";
+	}
+	//To add the items
+	@Override
+	public String add(Session session){
+		return "Welcome, you can now add items!";
+	}
+	//To purchase the items
+	@Override
+	public String purchase(Session session){
+		return "Welcome, you can now purchase items.";
+	}
+}

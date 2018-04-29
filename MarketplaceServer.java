@@ -1,8 +1,7 @@
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-// Ryan: Are you using all classes in the util package, if not please only include those you are.
-// Fixed: I'm not using any java.util classes
+import java.lang.reflect.Proxy;
 /**
  * Honor Pledge:
  * I pledge that I have neither given nor received any help on this assignment.
@@ -15,7 +14,6 @@ public class MarketplaceServer extends UnicastRemoteObject{
 		super(); 
 		this.name = name;
 	}
-	//Fixed: Removed HashMaps
 	/**
 	 * Implemented remote method from Marketplace interface.
 	 */
@@ -26,12 +24,8 @@ public class MarketplaceServer extends UnicastRemoteObject{
 			System.out.println("Creating a Marketplace Server!");
 			// Location of MarketplaceServer
 			String name = "//tesla.cs.iupui.edu:1400/MarketplaceServer";
-			//#Fixed: Created an instance of MarketplaceModel
-			// Create a new instance of a MarketplaceModel.
-			MarketplaceModel model = new MarketplaceModel(name);
-			// Create a new instance of a MarketplaceServer.
-			MarketplaceServer server = new MarketplaceServer(name);
-			System.out.println("MarketplaceModel: binding it to name: " + name);
+			// Proxy instance
+			Marketplace model = (Marketplace)Proxy.newProxyInstance(Marketplace.class.getClassLoader(),new Class<?>[]{Marketplace.class}, new AuthorizationInvocationHandler(new MarketplaceModel(name)));
 			// Binds to the RMI Service.
 			Naming.rebind(name, model);
 			System.out.println("Marketplace Server Ready!");

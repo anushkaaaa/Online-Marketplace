@@ -15,12 +15,10 @@ public class Invoker{
 		else
 			displayView=a.getCustomerview();
 	}
-	
 	//For controlling the display method
-	public void displayContent() {
-		displayView.display();
+	public int displayContent() {
+		return displayView.display();
 	}
-
 	//For controlling the message method
 	public void displayMessage(String msg) {
 		displayView.message(msg);
