@@ -1,0 +1,9 @@
+1,Iphone X,Latest version of Iphone,999,5
+2,BedSheets ,California King White Silky Soft bed sheets,18.69,3
+3,Age of Empires,Complete Collection of Age of Empires III by Microsoft,35,10
+4,E-Kettle,Smarter Silver kettle,149.99,5
+5,E-Blender,Bluetooth Enabled Smart Blender,179,8
+6,Chandeliers,Lifeholder Mini Crystal Chandelier,29.99,4
+7,Food Container,Rubbermaid Easy Find Lid 42-Piece,15.30,5
+8,Fossil watch,Chronograph Brown Leather Watch For Men,62.99,2
+9,Deodorant, Davidoff Cool Water For Women,19.92,6
